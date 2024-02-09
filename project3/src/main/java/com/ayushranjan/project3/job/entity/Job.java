@@ -1,12 +1,31 @@
 package com.ayushranjan.project3.job.entity;
 
+import com.ayushranjan.project3.company.entity.Company;
+import jakarta.persistence.*;
+
+@Entity
 public class Job {
+    public Job() {
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
     private String minSalary;
     private String maxSalary;
     private String location;
+    @ManyToOne
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
         this.id = id;

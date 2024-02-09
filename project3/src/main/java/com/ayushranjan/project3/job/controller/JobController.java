@@ -1,5 +1,6 @@
 package com.ayushranjan.project3.job.controller;
 
+import com.ayushranjan.project3.company.entity.Company;
 import com.ayushranjan.project3.job.entity.Job;
 import com.ayushranjan.project3.job.service.JobService;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,6 @@ public class JobController {
         return new ResponseEntity<>("Job added successfully", HttpStatus.CREATED);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Job> getJobById(@PathVariable Long id) {
         Job job = jobService.getJobById(id);
@@ -41,14 +41,15 @@ public class JobController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteJobById(@PathVariable Long id) {
-       boolean deleted = jobService.deleteJobById(id);
-       if(deleted) return new ResponseEntity<>("Job deleted successfully",HttpStatus.OK);
-       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        boolean deleted = jobService.deleteJobById(id);
+        if (deleted) return new ResponseEntity<>("Job deleted successfully", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateJob(@PathVariable Long id, @RequestBody Job updatedJob){
+    public ResponseEntity<String> updateJob(@PathVariable Long id, @RequestBody Job updatedJob) {
         boolean updated = jobService.updateJobById(id, updatedJob);
-        if(updated) return new ResponseEntity<>("Job updated successfully",HttpStatus.OK);
+        if (updated) return new ResponseEntity<>("Job updated successfully", HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
